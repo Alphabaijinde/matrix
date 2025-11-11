@@ -28,7 +28,10 @@ MATRiX is an advanced simulation platform that integrates **MuJoCo**, **Unreal E
   │   └── UeSim/
   ├── build.sh                     # One-click build script
   ├── run_sim.sh                   # Simulation launch script
+  ├── sim_launcher                 # Launcher UI
+  ├── README_CN.md                 # Chinese Project documentation
   └── README.md                    # Project documentation
+  
   ```
 
   ---
@@ -44,6 +47,7 @@ MATRiX is an advanced simulation platform that integrates **MuJoCo**, **Unreal E
   - **MuJoCo:** 3.3.0 open-source version (integrated)  
   - **Remote Controller:** Required (Recommended: *Logitech Wireless Gamepad F710*)  
   - **Python Dependency:** `gdown`  
+  - **ROS Dependency:** `ROS_humble`  
 
   ---
 
@@ -70,7 +74,7 @@ MATRiX is an advanced simulation platform that integrates **MuJoCo**, **Unreal E
   2. **Download MATRiX simulator**
 
      - **Method 1: Google Drive**  
-       [Google Drive Download Link](https://drive.google.com/drive/folders/1JN9K3m6ZvmVpHY9BLk4k_Yj9vndyh8nT?usp=sharing)
+       [Google Drive Download Link](https://drive.google.com/file/d/1WMtHqtJEggjgTk0rOcwO6m99diUlzq_J/view?usp=sharing)
 
        **Download via gdown:**
        ```bash
@@ -79,7 +83,7 @@ MATRiX is an advanced simulation platform that integrates **MuJoCo**, **Unreal E
        ```
 
      - **Method 2: Baidu Netdisk**  
-       [Baidu Netdisk Link](https://pan.baidu.com/s/1o8UEO1vUxPYmzeiiP9DYgg?pwd=hwqs)  
+       [Baidu Netdisk Link](https://pan.baidu.com/s/1-OFLjpxDaRe6UYilaKbO2w?pwd=dwh8)  
 
      - **Method 3: JFrog**  
        ```bash
@@ -124,21 +128,26 @@ MATRiX is an advanced simulation platform that integrates **MuJoCo**, **Unreal E
 
   ## 🐕 Simulation Setup Guide
 
-  1. **Select Robot Type**  
+  1. **Run the launcher**
+  ```bash
+      cd matrix
+      ./sim_launcher
+  ```
+  2. **Select Robot Type**  
     Choose the type of quadruped robot for the simulation.
 
-  2. **Select Environment**  
+  3. **Select Environment**  
     Pick the desired simulation environment or map.
 
-  3. **Choose Control Device**  
+  4. **Choose Control Device**  
     Select your preferred control device:  
     - **Gamepad Control**  
     - **Keyboard Control**
 
-  4. **Enable Headless Mode (Optional)**  
+  5. **Enable Headless Mode (Optional)**  
     Toggle the **Headless Mode** option for running the simulation without a graphical interface.
 
-  5. **Launch Simulation**  
+  6. **Launch Simulation**  
     Click the **Launch Simulation** button to start the simulation.
 
   During simulation, if the UE window is active, you can press **ALT + TAB** to switch out of it.  
@@ -180,30 +189,58 @@ MATRiX is an advanced simulation platform that integrates **MuJoCo**, **Unreal E
 
   Example snippet:
   ```json
-  "sensors": {
-    "camera": {
-      "position": { "x": 29.0, "y": 0.0, "z": 1.0 },
-      "rotation": { "roll": 0.0, "pitch": 15.0, "yaw": 0.0 },
-      "height": 1080,
-      "width": 1920,
-      "sensor_type": "rgb",
-      "topic": "/image_raw/compressed"
-    },
-    "depth_sensor": {
-      "position": { "x": 29.0, "y": 0.0, "z": 1.0 },
-      "rotation": { "roll": 0.0, "pitch": 15.0, "yaw": 0.0 },
-      "height": 480,
-      "width": 640,
-      "sensor_type": "depth",
-      "topic": "/image_raw/compressed/depth"
-  },
-  "lidar": {
-    "position": { "x": 13.011, "y": 2.329, "z": 17.598 },
-    "rotation": { "roll": 0.0, "pitch": 0.0, "yaw": 0.0 },
-    "sensor_type": "mid360",
-    "topic": "/livox/lidar"
-  }
-}
+        "sensors": {
+            "camera": {
+                "position": {
+                    "x": 29.0,
+                    "y": 0.0,
+                    "z": 1.0
+                },
+                "rotation": {
+                    "roll": 0.0,
+                    "pitch": 15.0,
+                    "yaw": 0.0
+                },
+                "height": 1080,
+                "width": 1920,
+                "sensor_type": "rgb",
+                "topic": "/image_raw/compressed",
+                "fov": 90.0
+            },
+            "depth_sensor": {
+                "position": {
+                    "x": 29.0,
+                    "y": 0.0,
+                    "z": 1.0
+                },
+                "rotation": {
+                    "roll": 0.0,
+                    "pitch": 15.0,
+                    "yaw": 0.0
+                },
+                "height": 480,
+                "width": 640,
+                "sensor_type": "depth",
+                "topic": "/image_raw/compressed/depth",
+                "fov": 90.0
+            },
+            "lidar": {
+                "position": {
+                    "x": 13.011,
+                    "y": 2.329,
+                    "z": 17.598
+                },
+                "rotation": {
+                    "roll": 0.0,
+                    "pitch": -60.0,
+                    "yaw": 0.0
+                },
+                "sensor_type": "mid360",
+                "topic": "/livox/lidar",
+                "draw_points": false,
+                "random_scan": false
+            }
+        }
 ```
 
 - Adjust **pose** and **number of sensors** as needed  

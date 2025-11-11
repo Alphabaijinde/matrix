@@ -28,7 +28,9 @@ MATRiX 是一个先进的仿真平台，集成了 **MuJoCo**、**Unreal Engine 5
   │   └── UeSim/
   ├── build.sh                     # 一键构建脚本
   ├── run_sim.sh                   # 仿真启动脚本
-  └── README.md                    # 项目文档
+  ├── sim_launcher                 # 启动界面
+  ├── README_CN.md                 # 中文项目文档
+  └── README.md                    # 英语项目文档
   ```
 
   ---
@@ -44,6 +46,7 @@ MATRiX 是一个先进的仿真平台，集成了 **MuJoCo**、**Unreal Engine 5
   - **MuJoCo：** 3.3.0 开源版本（已集成）  
   - **远程控制器：** 必需（推荐：*Logitech Wireless Gamepad F710*）  
   - **Python 依赖：** `gdown`  
+  - **ROS Dependency:** `ROS_humble`  
 
   ---
 
@@ -70,7 +73,7 @@ MATRiX 是一个先进的仿真平台，集成了 **MuJoCo**、**Unreal Engine 5
   2. **下载 MATRiX 仿真器**
 
      - **方法 1：Google Drive**  
-       [Google Drive 下载链接](https://drive.google.com/drive/folders/1JN9K3m6ZvmVpHY9BLk4k_Yj9vndyh8nT?usp=sharing)
+       [Google Drive 下载链接](https://drive.google.com/file/d/1WMtHqtJEggjgTk0rOcwO6m99diUlzq_J/view?usp=sharing)
 
        **通过 gdown 下载：**
        ```bash
@@ -79,7 +82,7 @@ MATRiX 是一个先进的仿真平台，集成了 **MuJoCo**、**Unreal Engine 5
        ```
 
      - **方法 2：百度网盘**  
-       [百度网盘链接](https://pan.baidu.com/s/1o8UEO1vUxPYmzeiiP9DYgg?pwd=hwqs)  
+       [百度网盘链接](https://pan.baidu.com/s/1-OFLjpxDaRe6UYilaKbO2w?pwd=dwh8)  
 
      - **方法 3：JFrog**  
        ```bash
@@ -124,21 +127,27 @@ MATRiX 是一个先进的仿真平台，集成了 **MuJoCo**、**Unreal Engine 5
 
   ## 🐕 仿真设置指南
 
-  1. **选择机器人类型**  
+  1. **运行启动界面**
+  ```bash
+      cd matrix
+      ./sim_launcher
+  ```
+
+  2. **选择机器人类型**  
     选择仿真中使用的四足机器人类型。
 
-  2. **选择环境**  
+  3. **选择环境**  
     选择所需的仿真环境或地图。
 
-  3. **选择控制设备**  
+  4. **选择控制设备**  
     选择首选的控制设备：  
     - **游戏手柄控制**  
     - **键盘控制**
 
-  4. **启用无头模式（可选）**  
+  5. **启用无头模式（可选）**  
     切换 **无头模式** 选项以在无图形界面下运行仿真。
 
-  5. **启动仿真**  
+  6. **启动仿真**  
     点击 **启动仿真** 按钮开始仿真。
 
   在仿真运行过程中，如果 UE 界面处于激活状态，可按下 **ALT + TAB** 切出界面。  
@@ -183,30 +192,58 @@ MATRiX 是一个先进的仿真平台，集成了 **MuJoCo**、**Unreal Engine 5
 
   示例片段：
   ```json
-  "sensors": {
-    "camera": {
-      "position": { "x": 29.0, "y": 0.0, "z": 1.0 },
-      "rotation": { "roll": 0.0, "pitch": 15.0, "yaw": 0.0 },
-      "height": 1080,
-      "width": 1920,
-      "sensor_type": "rgb",
-      "topic": "/image_raw/compressed"
-    },
-    "depth_sensor": {
-      "position": { "x": 29.0, "y": 0.0, "z": 1.0 },
-      "rotation": { "roll": 0.0, "pitch": 15.0, "yaw": 0.0 },
-      "height": 480,
-      "width": 640,
-      "sensor_type": "depth",
-      "topic": "/image_raw/compressed/depth"
-  },
-  "lidar": {
-    "position": { "x": 13.011, "y": 2.329, "z": 17.598 },
-    "rotation": { "roll": 0.0, "pitch": 0.0, "yaw": 0.0 },
-    "sensor_type": "mid360",
-    "topic": "/livox/lidar"
-  }
-}
+        "sensors": {
+            "camera": {
+                "position": {
+                    "x": 29.0,
+                    "y": 0.0,
+                    "z": 1.0
+                },
+                "rotation": {
+                    "roll": 0.0,
+                    "pitch": 15.0,
+                    "yaw": 0.0
+                },
+                "height": 1080,
+                "width": 1920,
+                "sensor_type": "rgb",
+                "topic": "/image_raw/compressed",
+                "fov": 90.0
+            },
+            "depth_sensor": {
+                "position": {
+                    "x": 29.0,
+                    "y": 0.0,
+                    "z": 1.0
+                },
+                "rotation": {
+                    "roll": 0.0,
+                    "pitch": 15.0,
+                    "yaw": 0.0
+                },
+                "height": 480,
+                "width": 640,
+                "sensor_type": "depth",
+                "topic": "/image_raw/compressed/depth",
+                "fov": 90.0
+            },
+            "lidar": {
+                "position": {
+                    "x": 13.011,
+                    "y": 2.329,
+                    "z": 17.598
+                },
+                "rotation": {
+                    "roll": 0.0,
+                    "pitch": -60.0,
+                    "yaw": 0.0
+                },
+                "sensor_type": "mid360",
+                "topic": "/livox/lidar",
+                "draw_points": false,
+                "random_scan": false
+            }
+        }
 ```
 
 - 根据需要调整 **位姿** 和 **传感器数量**  
